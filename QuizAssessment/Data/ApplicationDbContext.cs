@@ -10,5 +10,12 @@ namespace QuizAssessment.Data
             
         }
         public DbSet<Quiz> Quizzes { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Quiz>().HasData(
+                new Quiz { Id=1, Question="What is 1+1?", Answer="2"},
+                new Quiz { Id=2, Question="What is 1+2?", Answer="3"}
+                );
+        }
     }
 }
