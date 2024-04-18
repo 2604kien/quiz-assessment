@@ -21,9 +21,48 @@ namespace QuizAssessment.Controllers
 		}
 		[HttpPost]
 		public IActionResult Create(Quiz obj) { 
-			_context.Quizzes.Add(obj);
-			_context.SaveChanges();
-			return RedirectToAction("Index");
+			if (ModelState.IsValid)
+			{
+                _context.Quizzes.Add(obj);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+			return View();
 		}
-	}
+		public IActionResult Edit(int? id)
+		{
+            if ((id==null)||id==0)
+            {
+				return NotFound();
+            }
+			Quiz foundedQuiz=_context.Quizzes.Find(id);
+			if(foundedQuiz==null)
+			{
+				return NotFound();
+			}
+            return View(foundedQuiz);
+		}
+		[HttpPost]
+		public IActionResult Edit(Quiz obj) {
+			if(ModelState.IsValid)
+			{
+				_context.Quizzes.Update(obj);
+				_context.SaveChanges();
+				return RedirectToAction("Index");
+			}
+			return View();
+		}
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            Quiz obj = _context.Quizzes.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            _context.Quizzes.Remove(obj);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+    }
 }
