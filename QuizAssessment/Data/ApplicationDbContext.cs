@@ -17,5 +17,6 @@ namespace QuizAssessment.Data
                 new Quiz { Id=2, Question="What is 1+2?", Answer="3"}
                 );
         }
+        public DbSet<Assessment> Assessments { get; set; }
     }
 }

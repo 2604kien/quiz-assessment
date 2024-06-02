@@ -11,8 +11,8 @@ using QuizAssessment.Data;
 namespace QuizAssessment.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240416055700_AddQuizTableToDb")]
-    partial class AddQuizTableToDb
+    [Migration("20240419061333_AssessmentMigration")]
+    partial class AssessmentMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,23 @@ namespace QuizAssessment.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("QuizAssessment.Models.Assessment", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<float>("Grade")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Assessments");
+                });
 
             modelBuilder.Entity("QuizAssessment.Models.Quiz", b =>
                 {
@@ -43,6 +60,20 @@ namespace QuizAssessment.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Quizzes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Answer = "2",
+                            Question = "What is 1+1?"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Answer = "3",
+                            Question = "What is 1+2?"
+                        });
                 });
 #pragma warning restore 612, 618
         }

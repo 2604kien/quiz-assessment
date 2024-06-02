@@ -1,0 +1,14 @@
+﻿@model QuizAssessmentViewModels;
+
+<div>
+	<form method="post" asp-controller="Assessment" asp-action="Create">
+		@for (int i=0; i<Model.Quiz.Count();i++)
+		{
+			<div>
+				<h3>@Model.Quiz[i].Question</h3>
+				<input type="text" name="answer[@i]"/>
+			</div>
+		}
+		<button class="btn btn-primary">Submit Answer</button>
+	</form>
+</div>

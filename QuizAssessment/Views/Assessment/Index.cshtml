@@ -1,0 +1,42 @@
+﻿@model List<Assessment>
+<div class="container">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h1 class="text-primary">Assessment List</h1>
+        </div>
+
+    <table class="table table-border table-striped">
+        <thead>
+            <tr class="text-center">
+                <th>
+                    Name
+                </th>
+                <th>
+                    Grade
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            
+            @if (Model!=null){ @foreach (var obj in Model.OrderBy(u => u.Id))
+            {
+                <tr>
+                    <td>@obj.Name</td>
+                    <td>@obj.Grade</td>
+                    <td style="width:100px; text-align:center">
+                        <div class="w-100 btn-group d-flex justify-content-center align-items-center" role="group">
+                            <a asp-controller="Assessment" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-primary mx-2" style="width:150px">Edit</a>
+                            <form asp-controller="Assessment" asp-action="Delete" method="post">
+                                <input type="hidden" name="id" value="@obj.Id" />
+                                <button type="submit" class="btn btn-danger mx-2 ">Delete</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }}
+        </tbody>
+    </table>
+</div>

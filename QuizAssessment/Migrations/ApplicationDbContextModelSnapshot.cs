@@ -21,6 +21,23 @@ namespace QuizAssessment.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("QuizAssessment.Models.Assessment", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<float>("Grade")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Assessments");
+                });
+
             modelBuilder.Entity("QuizAssessment.Models.Quiz", b =>
                 {
                     b.Property<int>("Id")

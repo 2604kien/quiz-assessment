@@ -19,6 +19,10 @@ namespace QuizAssessment.Controllers
 		{
 			return View();
 		}
+		public IActionResult Exam()
+		{
+			return View();
+		}
 		[HttpPost]
 		public IActionResult Create(Quiz obj) { 
 			if (ModelState.IsValid)
